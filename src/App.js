@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SearchForm from './components/SearchForm';
+import WeatherDisplay from './components/WeatherDisplay';
+import './styles.css'; 
+import styled from 'styled-components'; // Import Styled Components
+
+const AppWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 20px;
+  font-size: 2rem;
+`;
 
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
+
+  const handleWeatherData = (data) => {
+    setWeatherData(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppWrapper>
+      <Title>Weather App</Title>
+      <SearchForm onWeatherData={handleWeatherData} />
+      <WeatherDisplay weatherData={weatherData} />
+    </AppWrapper>
   );
 }
 
 export default App;
+
